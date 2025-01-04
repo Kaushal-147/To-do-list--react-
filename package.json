@@ -1,4 +1,6 @@
 {
+  "homepage": "https://github.com/Kaushal-147/To-do-list--react-",
+  "predeploy": "npm run build",
   "name": "to-do-list",
   "private": true,
   "version": "0.0.0",
