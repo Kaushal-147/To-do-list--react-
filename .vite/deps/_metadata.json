@@ -1,8 +1,43 @@
 {
-  "hash": "b820f10e",
+  "hash": "c5eb9f9f",
   "configHash": "19dde14f",
-  "lockfileHash": "054bc065",
-  "browserHash": "d24dee41",
-  "optimized": {},
-  "chunks": {}
+  "lockfileHash": "d198a50e",
+  "browserHash": "1ccc1ab8",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "4242114a",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "d0c75c92",
+      "needsInterop": true
+    },
+    "react-dom": {
+      "src": "../../node_modules/react-dom/index.js",
+      "file": "react-dom.js",
+      "fileHash": "26bad3ec",
+      "needsInterop": true
+    },
+    "uuid": {
+      "src": "../../node_modules/uuid/dist/esm-browser/index.js",
+      "file": "uuid.js",
+      "fileHash": "0df144e7",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-MXRL7WSR": {
+      "file": "chunk-MXRL7WSR.js"
+    },
+    "chunk-JCH2SJW3": {
+      "file": "chunk-JCH2SJW3.js"
+    },
+    "chunk-BUSYA2B4": {
+      "file": "chunk-BUSYA2B4.js"
+    }
+  }
 }
