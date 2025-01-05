@@ -16,6 +16,7 @@ function App()
     {
         console.log(todos);
         localStorage.setItem("todos", JSON.stringify(todos))
+        
     };
   
     useEffect(() => 
@@ -101,7 +102,7 @@ function App()
             let id = e.target.name;
             let newtodos = todos.filter((item)=>{return item.id !== id;});
             console.log(newtodos);
-            setTodos([newtodos]);
+            setTodos(newtodos);
             console.log(todos, "handleDelete pachhi confirm kar etle newtodo delted");
             saveTodo();
         } 
@@ -155,12 +156,12 @@ function App()
                <div className="task-action flex flex-row justify-between items-center space-x-3">
                    <button className="edit-button  size-9 rounded-full   flex flex-row justify-center items-center">
                      <span className='size-9 hover:size-[2.252rem] active:size-9'>
-                     <img name={item.id}  onClick={handleEdit} src="../src/assets/edit.png" alt="edit" />
+                         <img name={item.id}  onClick={handleEdit} src="../src/assets/edit.png" alt="edit" />
                      </span>
                    </button>
                    <button  className="delete-button  size-9 rounded-full   flex flex-row justify-center items-center">
                      <span className='size-9 hover:size-[2.252rem] active:size-9'>
-                     <img name={item.id} onClick={handleDelete} src="../src/assets/deelete.png " alt="delete" />
+                         <img name={item.id} onClick={handleDelete} src="../src/assets/deelete.png " alt="delete" />
                      </span>
                    </button>
                </div>
