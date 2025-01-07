@@ -13,27 +13,53 @@ function App() {
   const inputRef = useRef(null);
 
   const saveTodo = () => {
+    console.log(todos, "just befor saving");
     localStorage.setItem("todos", JSON.stringify(todos));
   };
 
   useEffect(() => {
     let todostring = localStorage.getItem("todos");
+    console.log(todostring, "getting from ls");
     if (todostring) {
-      let todos = JSON.parse(localStorage.getItem("todos"));
-      setTodos(todos);
+      console.log( "ha ajao");
+      const todosss = JSON.parse(todostring);
+      console.log(todosss, "just after getting");
+      setTodos(todosss);
+      console.log(todos, "todos updated");
     }
   }, []);
 
   useEffect(() => {
     saveTodo();
+    console.log(todos, "todos updated");
   }, [todos]);
+
+  let handleSave = () => 
+  {
+    let index = todos.findIndex((item) => { return item.id === idfromtop });
+    if (todo === "" || todo === null || todo === " ") {
+      alert("You can't save an empty task.");
+      return;
+    } else {
+      todos[index].todo = todo;
+      todos[index].itemclass = "task-card bg-[#252E32] bg-opacity-[75%]  w-1/3 h-12 flex justify-between items-center p-4 rounded-3xl mb-3";
+      setAddsave("Add");
+      setTodo("");
+      saveTodo();
+    }
+  };
 
   let handleAdd = (e) => {
     if (todo === "" || todo === null || todo === " ") return;
-    if (addsave === "Save") handleSave();
+    if (addsave === "Save") {handleSave();}
     else {
-      setTodos([...todos, { todo, isCompleted: false, id: uuidv4(), itemclass: "task-card bg-[#252E32] bg-opacity-[75%]  w-1/3 h-12 flex justify-between items-center p-4 rounded-3xl mb-3" }]);
+      console.log(todos,"before adding");
+      const newTodos = [...todos, { todo, isCompleted: false, id: uuidv4(), itemclass: "task-card bg-[#252E32] bg-opacity-[75%]  w-1/3 h-12 flex justify-between items-center p-4 rounded-3xl mb-3" }];
+      setTodos(newTodos);
+      console.log(todos, "after adding");
       setTodo("");
+      
+      console.log(localStorage.getItem("todos"), "local storage");
     }
   };
 
@@ -47,17 +73,24 @@ function App() {
       alert("You can't edit a completed task.");
       return;
     } else {
-      if (document.getElementById("Input").value === "" || document.getElementById("Input").value === " " || document.getElementById("Input").value === null || document.getElementById("Input").value === todos[index].todo) {
+      if (document.getElementById("Input").value === "" || document.getElementById("Input").value === " " || document.getElementById("Input").value === null || document.getElementById("Input").value === todos[index].todo) 
+        {
+        setAddsave("Save");
         todos[index].itemclass = "task-card bg-[#252E32] bg-opacity-[25%]  w-1/3 h-12 flex justify-between items-center p-4 rounded-3xl mb-3";
         setTodo(todos[index].todo);
-        setAddsave("Save");
         inputRef.current.focus(); // Set focus to the input element
-      } else {
-        if (confirm("Warning: Anything in Input will be overwritten.")) {
-          todos[index].itemclass = "task-card bg-[#252E32] bg-opacity-[25%]  w-1/3 h-12 flex justify-between items-center p-4 rounded-3xl mb-3";
-          inputRef.current.focus(); // Set focus to the input element
         }
-      }
+        else
+        {
+           console.log(confirm("overwritten"),"hiiiiiiiiiiiiiiiiiiiiiiiiii")
+           if (confirm("Warning: Anything in Input will be overwritten.")) 
+          {
+              setAddsave("Save");
+              todos[index].itemclass = "task-card bg-[#252E32] bg-opacity-[25%]  w-1/3 h-12 flex justify-between items-center p-4 rounded-3xl mb-3";
+              setTodo(todos[index].todo);
+              inputRef.current.focus(); // Set focus to the input element
+          }
+        }
     }
   };
 
@@ -66,6 +99,7 @@ function App() {
       let id = e.target.name;
       let newtodos = todos.filter((item) => { return item.id !== id; });
       setTodos(newtodos);
+      saveTodo();
     } else {
       return;
     }
@@ -77,6 +111,7 @@ function App() {
     let newtodos = [...todos];
     newtodos[index].isCompleted = !newtodos[index].isCompleted;
     setTodos(newtodos);
+    saveTodo();
   };
 
   return (
@@ -98,6 +133,7 @@ function App() {
       </div>
       <div className="task-list min-w-full flex justify-center items-center flex-col">
         {todos.map((item) => {
+       
           return (
             <div key={item.id} className={item.itemclass}>
               <div className="check-box size-8 flex justify-center items-center">
